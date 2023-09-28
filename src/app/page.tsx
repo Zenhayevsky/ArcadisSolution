@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Footer } from './components/footer';
 import { TaskForm } from './components/TaskFrom'
 
-import * as chatGpt from '../../Back-end-chatgpt/index'
+import * as chatGpt from '../../Back-end-chatgpt/chatGpt/index'
 
 export default function Home() {
   const [newtask, setNewTask] = useState(false);
