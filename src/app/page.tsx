@@ -1,13 +1,14 @@
 "use client";
 import { Button } from './components/Button';
 import { User } from 'lucide-react';
-import junglelogo from '../assets/logo-pata.svg';
+import patalogo from '../assets/logo-pata.svg';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Footer } from './components/footer';
+import { Footer } from './components/Footer';
 import { TaskForm } from './components/TaskFrom';
 
 import * as chatGpt from '../../Back-end/chatGpt/index';
+import { HomeStartRight } from './components/HomeStartRight';
 
 export default function Home() {
   const [newtask, setNewTask] = useState(false);
@@ -31,27 +32,21 @@ export default function Home() {
           <span className='underline'>Crie sua conta</span> e tenha acesso a benefícios 
         </p>
       </a>
-
-      {/* Hero */}
-      { newtask ? (<><TaskForm /> <Button tittle='volta' onClick={() => setNewTask(false)} /> </>) : 
+    
         <div className='space-y-5'>
-          <Image alt='logo arcadis solution' src={junglelogo}/>
-          
-          <div className='max-w-[420px] space-y-1'>
-            <h1 className='text-5xl font-bold leading-tight text-gray-50'>Sua fonte de dados taxonomicos</h1>
-            <p className='text-lg leading-relaxed'>
-              Obtenha dados atualizados sobre taxonomia e quaisquer animais.
-            </p>
-          </div>
-
-          <a className='inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase leading-none text-primary-200 hover:bg-green-800 hover:cursor-pointer' onClick={() => {setNewTask(true)}}>
-            COMEÇAR A PESQUISA
-          </a>
-          {/* <a className='inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase leading-none text-primary-200 hover:bg-green-800 hover:cursor-pointer' onClick={() => {chatGpt.CallChatGPT('abelhas')}}>
-            COMEÇAR A PESQUISA
-          </a> */}
+          <Image alt='logo arcadis solution' src={patalogo}/>
+          { newtask ?
+          (
+          <TaskForm />
+          ): 
+          <>
+            <HomeStartRight />
+            <Button tittle='COMEÇAR A PESQUISA' onClick={() => {setNewTask(true)}} />
+            {/* <a className='inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase leading-none text-primary-200 hover:bg-green-800 hover:cursor-pointer' onClick={() => {chatGpt.CallChatGPT('abelhas')}}>
+              COMEÇAR A PESQUISA
+            </a> */}
+          </>}
         </div>
- } 
       <Footer/>
     </div>
 
