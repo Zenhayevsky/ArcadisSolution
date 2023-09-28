@@ -5,9 +5,9 @@ import junglelogo from '../assets/logo-pata.svg';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Footer } from './components/footer';
-import { TaskForm } from './components/TaskFrom'
+import { TaskForm } from './components/TaskFrom';
 
-import * as chatGpt from '../../Back-end-chatgpt/chatGpt/index'
+import * as chatGpt from '../../Back-end/chatGpt/index';
 
 export default function Home() {
   const [newtask, setNewTask] = useState(false);
