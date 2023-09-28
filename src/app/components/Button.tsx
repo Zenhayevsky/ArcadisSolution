@@ -1,17 +1,19 @@
 const style = {
-  color: 'red',
+  color: 'red'
 }
 
 const nome = 'Zenha'
 
 interface ButtonProps {
-  tittle: string
+  tittle: string;
+  onClick: () => void;
 }
 
 export function Button(props: ButtonProps) {
   return (
-    <p style={style}>
+    <button className="inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase 
+            leading-none text-primary-200 hover:bg-green-800 hover:cursor-pointer" {...props}>
       {props.tittle}
-    </p>
+    </button>
   )
 }

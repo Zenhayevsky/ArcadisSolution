@@ -1,9 +1,15 @@
+"use client";
 import { Button } from './components/Button';
-import { User } from 'lucide-react'
-import junglelogo from '../assets/logo-pata.svg'
-import Image from 'next/image'
+import { User } from 'lucide-react';
+import junglelogo from '../assets/logo-pata.svg';
+import Image from 'next/image';
+import { useState } from 'react';
+import { Footer } from './components/footer';
+import { TaskForm } from './components/TaskFrom'
 
 export default function Home() {
+  const [newtask, setNewTask] = useState(false);
+
   return (
   <main className='grid grid-cols-2 min-h-screen'>
 
@@ -23,32 +29,23 @@ export default function Home() {
       </a>
 
       {/* Hero */}
-      <div className='space-y-5'>
-        <Image alt='logo arcadis solution' src={junglelogo}/>
-        
-        <div className='max-w-[420px] space-y-1'>
-          <h1 className='text-5xl font-bold leading-tight text-gray-50'>Sua fonte de dados taxonomicos</h1>
-          <p className='text-lg leading-relaxed'>
-            Obtenha dados atualizados sobre taxonomia e quaisquer animais.
-          </p>
+      { newtask ? (<><TaskForm /> <Button tittle='volta' onClick={() => setNewTask(false)} /> </>) : 
+        <div className='space-y-5'>
+          <Image alt='logo arcadis solution' src={junglelogo}/>
+          
+          <div className='max-w-[420px] space-y-1'>
+            <h1 className='text-5xl font-bold leading-tight text-gray-50'>Sua fonte de dados taxonomicos</h1>
+            <p className='text-lg leading-relaxed'>
+              Obtenha dados atualizados sobre taxonomia e quaisquer animais.
+            </p>
+          </div>
+
+          <a className='inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase leading-none text-primary-200 hover:bg-green-800 hover:cursor-pointer' onClick={() => {setNewTask(true)}}>
+            COMEÇAR A PESQUISA
+          </a>
         </div>
-
-        <a className='inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase leading-none text-primary-200  hover:bg-green-800' href=''>
-          CADASTRAR LEMBRANÇA
-        </a>
-      </div>
-
-      {/* copyright */}
-      <div className='text-sm leading-relaxed text-gray-200'>
-        Feito com 💚 por Zenha {' '}
-        <a
-        target='_blank'
-        rel='noreferrer'
-        className='underline hover:text-gray-100' 
-        href='https://github.com/Zenhayevsky'>
-          github
-        </a>
-      </div>
+ } 
+      <Footer/>
     </div>
 
     {/* right */}
