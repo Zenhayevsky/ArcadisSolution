@@ -7,8 +7,12 @@ import { useState } from 'react';
 import { Footer } from './components/footer';
 import { TaskForm } from './components/TaskFrom'
 
+import * as chatGpt from '../../Back-end-chatgpt/index'
+
 export default function Home() {
   const [newtask, setNewTask] = useState(false);
+
+  chatGpt.CallChatGPT('')
 
   return (
   <main className='grid grid-cols-2 min-h-screen'>
@@ -43,6 +47,9 @@ export default function Home() {
           <a className='inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase leading-none text-primary-200 hover:bg-green-800 hover:cursor-pointer' onClick={() => {setNewTask(true)}}>
             COMEÇAR A PESQUISA
           </a>
+          {/* <a className='inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase leading-none text-primary-200 hover:bg-green-800 hover:cursor-pointer' onClick={() => {chatGpt.CallChatGPT('abelhas')}}>
+            COMEÇAR A PESQUISA
+          </a> */}
         </div>
  } 
       <Footer/>
