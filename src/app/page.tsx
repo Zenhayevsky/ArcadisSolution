@@ -3,17 +3,30 @@ import { Button } from './components/Button';
 import { User } from 'lucide-react';
 import patalogo from '../assets/logo-pata.svg';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Footer } from './components/Footer';
-import { TaskForm } from './components/TaskFrom';
 
-import * as chatGpt from '../../Back-end/chatGpt/index';
 import { HomeStartRight } from './components/HomeStartRight';
 
-export default function Home() {
-  const [newtask, setNewTask] = useState(false);
+import * as chatGpt from '../../Back-end/chatGpt/index';
+import { ResultTask } from './components/ResultTask';
 
-  chatGpt.CallChatGPT('')
+export default function Home() {
+
+  const [newtask, setNewTask] = useState(false);
+  const [animal, setAnimal] = useState('');
+  const [showCard, setShowcard] = useState(false);
+  const [responseChatGpt, setResponseChatGpt] = useState('');
+  const [cardChange, setCardChange] = useState(false);
+
+  useEffect(() => {
+    setResponseChatGpt(localStorage.getItem("respostaChatGPT") || 'Lets start')
+  }, [cardChange]);
+
+  const chatGptConsult = async (animal: string, tipeprompt: number) => {
+    chatGpt.callChatGPT(animal, tipeprompt)
+    setShowcard(true);
+  };
 
   return (
   <main className='grid grid-cols-2 min-h-screen'>
@@ -37,14 +50,33 @@ export default function Home() {
           <Image alt='logo arcadis solution' src={patalogo}/>
           { newtask ?
           (
-          <TaskForm />
+            <>
+              <div className='max-w-[420px] space-y-1'>
+                <p className='text-lg leading-relaxed mb-4'>
+                  Digite o animal o espécie e então selecione o tipo de pesquisa que deseja fazer
+                </p>
+                <input type="text" className="cursor-pointer rounded-md mb-16 h-8 w-full p-2
+                focus:outline-none text-primary-500" onChange={event =>setAnimal(event.target.value)} />
+              </div>
+              <div className="grid grid-cols-3 gap-5 text-left">
+                <Button onClick={() => {
+                  chatGptConsult(animal, 1);
+                  setCardChange(!cardChange);
+                }} tittle="Taxonomy" />
+                <Button onClick={() => {
+                  chatGptConsult(animal, 2);
+                  setCardChange(!cardChange);
+                }} tittle="Ecological ctcs " />
+                <Button onClick={() => {
+                  chatGptConsult(animal, 3);
+                  setCardChange(!cardChange);
+                }} tittle="Threat level" />
+              </div>
+            </>
           ): 
           <>
             <HomeStartRight />
             <Button tittle='COMEÇAR A PESQUISA' onClick={() => {setNewTask(true)}} />
-            {/* <a className='inline-block rounded-full bg-green-900 px-5 py-3 font-alt text-sm uppercase leading-none text-primary-200 hover:bg-green-800 hover:cursor-pointer' onClick={() => {chatGpt.CallChatGPT('abelhas')}}>
-              COMEÇAR A PESQUISA
-            </a> */}
           </>}
         </div>
       <Footer/>
@@ -55,10 +87,13 @@ export default function Home() {
       {/* blur */}
       <div className='absolute left-80 top-1/2 h-[288px] w-[526px] rounded-full -translate-y-1/2 translate-x-1/2 bg-primary-200 opacity-50 blur-full'/>
       <div className='flex flex-1 items-center justify-center'>
+      { showCard ? <ResultTask result={responseChatGpt} />
+      :
         <p className='text-center leading-relaxed w-[360px]'>
           Você ainda realizou uma busca, comece a{' '}
           <span className=' hover:text-gray-50'>pesquisar agora!</span>
         </p>
+      }
       </div>
     </div>
 
