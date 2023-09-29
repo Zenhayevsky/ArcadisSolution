@@ -42,7 +42,7 @@ export default function Home() {
         </div>
 
         <p className='text-sm leading-snug max-w-[140px]'>
-          <span className='underline'>Crie sua conta</span> e tenha acesso a benefícios 
+          <span className='underline'>Create an account</span> and access benefits
         </p>
       </a>
     
@@ -53,7 +53,7 @@ export default function Home() {
             <>
               <div className='max-w-[420px] space-y-1'>
                 <p className='text-lg leading-relaxed mb-4'>
-                  Digite o animal o espécie e então selecione o tipo de pesquisa que deseja fazer
+                  Enter the animal or species and then select the type of search you want to do
                 </p>
                 <input type="text" className="cursor-pointer rounded-md mb-16 h-8 w-full p-2
                 focus:outline-none text-primary-500" onChange={event =>setAnimal(event.target.value)} />
@@ -90,8 +90,8 @@ export default function Home() {
       { showCard ? <ResultTask result={responseChatGpt} />
       :
         <p className='text-center leading-relaxed w-[360px]'>
-          Você ainda realizou uma busca, comece a{' '}
-          <span className=' hover:text-gray-50'>pesquisar agora!</span>
+          Start your adventure through the animal world and get{' '}
+          <span className=' hover:text-gray-50'>the most up-to-date information now!</span>
         </p>
       }
       </div>
