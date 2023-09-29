@@ -1,10 +1,11 @@
+import * as apikey from '../secrets';
 
 export const callChatGPT = (animal, tipeprompt) => {
   
   const axios = require('axios');
 
-  const apiKey = ''
-  const apiUrl = 'https://api.openai.com/v1/completions'
+  const apiKey = apikey.API_KEY;
+  const apiUrl = apikey.URL_API;
 
   let prompt = '';
 
