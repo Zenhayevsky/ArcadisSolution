@@ -6,7 +6,7 @@ const nome = 'Zenha'
 
 interface ButtonProps {
   tittle: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export function Button(props: ButtonProps) {
