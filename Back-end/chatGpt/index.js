@@ -3,7 +3,7 @@ export const callChatGPT = (animal, tipeprompt) => {
   
   const axios = require('axios');
 
-  const apiKey = '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'
+  const apiKey = ''
   const apiUrl = 'https://api.openai.com/v1/completions'
 
   let prompt = '';
