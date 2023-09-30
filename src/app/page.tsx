@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Footer } from './components/Footer';
 import { ModalSignUp } from './components/ModalSignUp';
+import { ModalSignIn } from './components/ModalSignIn';
 
 import { HomeStartRight } from './components/HomeStartRight';
 
@@ -19,16 +20,8 @@ export default function Home() {
   const [showCard, setShowcard] = useState(false);
   const [responseChatGpt, setResponseChatGpt] = useState('');
   const [cardChange, setCardChange] = useState(false);
-  const [modal, setModal] = useState(false);
-
-  const  singUpContent = () => {
-    const text = 'Oi tudo bem Oi tudo bem Oi tudo bem Oi tudo bem Oi tudo bem '
-    return text
-  }
-
-  const tesfuncao = () => {
-    console.log('funfando')
-  }
+  const [modalSignUP, setModalSignUP] = useState(false);
+  const [modalSignIn, setModalSignIn] = useState(false);
 
   useEffect(() => {
     setResponseChatGpt(localStorage.getItem("respostaChatGPT") || 'Lets start')
@@ -42,7 +35,8 @@ export default function Home() {
   return (
   <main className='grid grid-cols-2 min-h-screen'>
 
-    {modal && <ModalSignUp onClose={() => setModal(false)} />}
+    {modalSignUP && <ModalSignUp onClose={() => setModalSignUP(false)} />}
+    {modalSignIn && <ModalSignIn onClose={() => setModalSignIn(false)} />}
 
     {/* left */}
     <div className='bg-[url(../assets/bg-stars.svg)] bg-cover p-16 bg-primary-300 bg-opacity-60 flex flex-col border-r border-white/10 items-start justify-between px-28 overflow-hidden py-16 relative'>
@@ -55,13 +49,13 @@ export default function Home() {
         </div>
 
         <p className='ml-3 text-sm leading-snug max-w-[144px]'>
-          <a onClick={() => setModal(true)} className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
+          <a onClick={() => setModalSignUP(true)} className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
             <span className='underline'> 
               Create an account
             </span> 
           </a>
               to have benefits or
-          <a className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
+          <a onClick={() => setModalSignIn(true)}  className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
             <span className='underline'>
               Sign in
             </span>
