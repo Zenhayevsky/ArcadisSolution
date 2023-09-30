@@ -5,6 +5,7 @@ import patalogo from '../assets/logo-pata.svg';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Footer } from './components/Footer';
+import { ModalSignUp } from './components/ModalSignUp';
 
 import { HomeStartRight } from './components/HomeStartRight';
 
@@ -18,6 +19,16 @@ export default function Home() {
   const [showCard, setShowcard] = useState(false);
   const [responseChatGpt, setResponseChatGpt] = useState('');
   const [cardChange, setCardChange] = useState(false);
+  const [modal, setModal] = useState(false);
+
+  const  singUpContent = () => {
+    const text = 'Oi tudo bem Oi tudo bem Oi tudo bem Oi tudo bem Oi tudo bem '
+    return text
+  }
+
+  const tesfuncao = () => {
+    console.log('funfando')
+  }
 
   useEffect(() => {
     setResponseChatGpt(localStorage.getItem("respostaChatGPT") || 'Lets start')
@@ -31,20 +42,32 @@ export default function Home() {
   return (
   <main className='grid grid-cols-2 min-h-screen'>
 
+    {modal && <ModalSignUp onClose={() => setModal(false)} />}
+
     {/* left */}
     <div className='bg-[url(../assets/bg-stars.svg)] bg-cover p-16 bg-primary-300 bg-opacity-60 flex flex-col border-r border-white/10 items-start justify-between px-28 overflow-hidden py-16 relative'>
       {/* blur */}
       <div className='absolute right-0 top-1/2 h-[288px] w-[526px] rounded-full -translate-y-1/2 translate-x-1/2 bg-red-700 opacity-50 blur-full'/>
       {/* sign in */}
-      <a href='' className='flex items-center gap-3 text-left hover:text-gray-50 transition-colors'>
+      <div className='flex'>
         <div className='flex h-10 w-10 items-center justify-center rounded-full bg-primary-500'>
-          <User className='h-5 w-5 text-gray- 500'/>
+          <User className='h-5 w-5 text-primary-200'/>
         </div>
 
-        <p className='text-sm leading-snug max-w-[140px]'>
-          <span className='underline'>Create an account</span> and access benefits
+        <p className='ml-3 text-sm leading-snug max-w-[144px]'>
+          <a onClick={() => setModal(true)} className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
+            <span className='underline'> 
+              Create an account
+            </span> 
+          </a>
+              to have benefits or
+          <a className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
+            <span className='underline'>
+              Sign in
+            </span>
+          </a>
         </p>
-      </a>
+        </div>
     
         <div className='space-y-5'>
           <Image alt='logo arcadis solution' src={patalogo}/>
@@ -58,7 +81,7 @@ export default function Home() {
                 <input type="text" className="cursor-pointer rounded-md mb-16 h-8 w-full p-2
                 focus:outline-none text-primary-500" onChange={event =>setAnimal(event.target.value)} />
               </div>
-              <div className="grid grid-cols-3 gap-5 text-left">
+              <div className="grid grid-cols-3 gap-5">
                 <Button onClick={() => {
                   chatGptConsult(animal, 1);
                   setCardChange(!cardChange);
