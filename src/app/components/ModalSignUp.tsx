@@ -1,6 +1,7 @@
 import { Children } from "react";
 import { Button } from "./Button";
-import { SInputText } from "../components/SInputText"
+import { SInputText } from "../components/SInputText";
+import { useEffect, useState } from 'react';
 
 interface ModalSignUpProps {
   onClose: () => void;
@@ -8,8 +9,14 @@ interface ModalSignUpProps {
 
 export const ModalSignUp = ( props: ModalSignUpProps ) => {
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [ocupation, setOcupation] = useState('');
+
   const signUp = () => {
-    console.log('enviando');
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("ocupation", ocupation);
   }
 
   return (
@@ -20,9 +27,9 @@ export const ModalSignUp = ( props: ModalSignUpProps ) => {
         </div>
         <div className="col-span-3">
           <div className="grid grid-cols-1 gap-2">
-            <SInputText label="Name" type="text"/>
-            <SInputText label="E-mail" type="text" />
-            <SInputText label="Ocupation" type="text" />
+            <SInputText customOnChange={event => {setName(event.target.value)}} label="Name" type="text"/>
+            <SInputText customOnChange={event => {setEmail(event.target.value)}} label="E-mail" type="text" />
+            <SInputText customOnChange={event => {setOcupation(event.target.value)}} label="Ocupation" type="text" />
           </div>
         </div>
         <div className="col-span-1 col-start-1 mt-5 "> 
