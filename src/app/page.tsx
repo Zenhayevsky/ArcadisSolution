@@ -2,6 +2,7 @@
 import { Button } from './components/Button';
 import { User } from 'lucide-react';
 import patalogo from '../assets/logo-pata.svg';
+import hamburgmenu from '../assets/hamburguer.svg';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Footer } from './components/Footer';
@@ -43,10 +44,15 @@ export default function Home() {
       {/* blur */}
       <div className='absolute right-0 top-1/2 h-[288px] w-[526px] rounded-full -translate-y-1/2 translate-x-1/2 bg-red-700 opacity-50 blur-full'/>
       {/* sign in */}
+      
+      <div>
       <div className='flex'>
         <div className='flex h-10 w-10 items-center justify-center rounded-full bg-primary-500'>
           <User className='h-5 w-5 text-primary-200'/>
         </div>
+
+        {/* <Image alt='logo arcadis solution' className='w-12' src={hamburgmenu}/> */}
+
 
         <p className='ml-3 text-sm leading-snug max-w-[144px]'>
           <a onClick={() => setModalSignUP(true)} className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
@@ -62,6 +68,9 @@ export default function Home() {
           </a>
         </p>
         </div>
+
+      </div>
+
     
         <div className='space-y-5'>
           <Image alt='logo arcadis solution' src={patalogo}/>
