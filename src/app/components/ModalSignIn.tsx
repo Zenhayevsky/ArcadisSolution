@@ -1,15 +1,31 @@
 import { Children } from "react";
 import { Button } from "./Button";
-import { SInputText } from "../components/SInputText"
+import { SInputText } from "../components/SInputText";
+import { useState } from 'react';
 
 interface ModalSignUpProps {
   onClose: () => void;
+  onSignIn: () => void;
 }
 
-export const ModalSignIn = ( props: ModalSignUpProps ) => {
+export const  ModalSignIn = ( props: ModalSignUpProps ) => {
+
+  const [emailSignIn, setEmailSignIn] = useState('');
+  const [invalidEmail, setInvalidEmail] = useState(false);
 
   const signIn = () => {
-    console.log('enviando');
+    const emailInStorage = localStorage.getItem("email");
+    const AuthorizedSignIn = (emailInStorage == emailSignIn);
+    
+    if (AuthorizedSignIn) {
+      props.onClose();
+      props.onSignIn();
+      setInvalidEmail(false);
+    }else {
+      setInvalidEmail(true);
+    }
+
+    return AuthorizedSignIn;
   }
 
   return (
@@ -20,7 +36,7 @@ export const ModalSignIn = ( props: ModalSignUpProps ) => {
         </div>
         <div className="col-span-3">
           <div className="grid grid-cols-1 gap-2">
-            <SInputText label="E-mail" type="text"/>
+            <SInputText invalidData={invalidEmail} customOnChange={event => {setEmailSignIn(event.target.value)}} label="E-mail" type="text"/>
           </div>
         </div>
         <div className="col-span-1 col-start-1 mt-5 "> 

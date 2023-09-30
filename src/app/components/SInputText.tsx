@@ -11,11 +11,13 @@ export interface SInputTextProps
   type: HTMLInputTypeAttribute;
   customOnChange?: (event: any) => void;
   dataIncomplete?: boolean;
+  invalidData?: boolean;
 }
 
 export const SInputText = forwardRef(
   (
     {
+      invalidData,
       dataIncomplete,
       className,
       label,
@@ -58,6 +60,13 @@ export const SInputText = forwardRef(
           <>
             <p className="text-xs text-red-400 font-semibold">
               Enter your {label}
+            </p>
+          </>
+        )}
+        {invalidData && (
+          <>
+            <p className="text-xs text-red-400 font-semibold">
+              This {label} is not on our database
             </p>
           </>
         )}
