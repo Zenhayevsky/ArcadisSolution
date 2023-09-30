@@ -1,7 +1,7 @@
 import { Children } from "react";
 import { Button } from "./Button";
 import { SInputText } from "../components/SInputText";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface ModalSignUpProps {
   onClose: () => void;
@@ -17,6 +17,7 @@ export const ModalSignUp = ( props: ModalSignUpProps ) => {
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
     localStorage.setItem("ocupation", ocupation);
+    props.onClose();
   }
 
   return (
