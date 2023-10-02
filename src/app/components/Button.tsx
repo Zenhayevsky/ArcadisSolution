@@ -1,9 +1,3 @@
-const style = {
-  color: 'red'
-}
-
-const nome = 'Zenha'
-
 interface ButtonProps {
   tittle: string;
   onClick?: () => void;
