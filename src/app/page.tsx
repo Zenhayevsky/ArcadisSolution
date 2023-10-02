@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { Footer } from './components/Footer';
 import { ModalSignUp } from './components/ModalSignUp';
 import { ModalSignIn } from './components/ModalSignIn';
+import { MenuBar } from './components/MenuBar';
 
 import { HomeStartRight } from './components/HomeStartRight';
 
@@ -24,6 +25,7 @@ export default function Home() {
   const [modalSignUP, setModalSignUP] = useState(false);
   const [modalSignIn, setModalSignIn] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
+  const [menuBar, setMenuBar] = useState(false);
   const [emailKey, setEmailKey] = useState('');
 
 
@@ -49,26 +51,33 @@ export default function Home() {
       {/* sign in */}
       
       <div>
-      <div className='flex'>
-        <div className='flex h-10 w-10 items-center justify-center rounded-full bg-primary-500'>
-          <User className='h-5 w-5 text-primary-200'/>
-        </div>
-        { emailKey && signedIn ? <Image alt='logo arcadis solution' className='w-12' src={hamburgmenu}/> 
-        :
-        <p className='ml-3 text-sm leading-snug max-w-[144px]'>
-          <a onClick={() => setModalSignUP(true)} className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
-            <span className='underline'> 
-              Create an account
-            </span> 
-          </a>
-              to have benefits or
-          <a onClick={() => {setModalSignIn(true); setEmailKey(localStorage.getItem("email") || '')}}  className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
-            <span className='underline'>
-              Sign in
-            </span>
-          </a>
-        </p>
-        }
+        <div className='flex'>
+          <div className='flex h-10 w-10 items-center justify-center rounded-full bg-primary-500'>
+              <User className='h-5 w-5 text-primary-200'/>
+          </div>
+          { emailKey && signedIn 
+          ?
+            <div>
+              <a onClick={() => setMenuBar(!menuBar)} className='cursor-pointer'>
+                <Image alt='logo arcadis solution' className='w-12' src={hamburgmenu}/>
+              </a>  
+              { menuBar && <MenuBar onLogOf={() =>setSignedIn(false)}/> }
+            </div>
+          :
+            <p className='ml-3 text-sm leading-snug max-w-[144px]'>
+              <a onClick={() => setModalSignUP(true)} className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
+                <span className='underline'> 
+                  Create an account
+                </span> 
+              </a>
+                  to have benefits or
+              <a onClick={() => {setModalSignIn(true); setEmailKey(localStorage.getItem("email") || '')}}  className='cursor-pointer flex items-center text-left hover:text-gray-50 transition-colors'>
+                <span className='underline'>
+                  Sign in
+                </span>
+              </a>
+            </p>
+          }
         </div>
       </div>
 
