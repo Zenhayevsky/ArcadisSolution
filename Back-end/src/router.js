@@ -1,5 +1,6 @@
 const express = require('express');
 const summaries = require('../sumary.json');
+const users = require('../users.json');
 const router = express.Router();
 const fs = require('fs');
 
@@ -34,6 +35,19 @@ router.post('/summary', (req, res) => {
   });
 
   res.status(201).send('Done saving new summary');
+
+    
+});
+
+router.post('/createuser', (req, res) => {
+
+  users.push(req.body);
+  
+  fs.writeFile('users.json', JSON.stringify(users), err => {
+    if (err) throw err; 
+  });
+
+  res.status(201).send('Done saving new user');
 
     
 });
