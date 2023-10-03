@@ -1,6 +1,5 @@
-import { Children } from "react";
-import { Button } from "./Button";
-import { SInputText } from "../components/SInputText";
+import { Button } from './Button';
+import { SInputText } from '../components/SInputText';
 import { useState } from 'react';
 
 interface ModalSignUpProps {
@@ -14,11 +13,11 @@ export const ModalSignUp = ( props: ModalSignUpProps ) => {
   const [ocupation, setOcupation] = useState('');
 
   const signUp = () => {
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("ocupation", ocupation);
+    localStorage.setItem('name', name);
+    localStorage.setItem('email', email);
+    localStorage.setItem('ocupation', ocupation);
     props.onClose();
-  }
+  };
 
   return (
     <div className="bg-primary-500/80 flex justify-center items-center border-primary-500 rounded-lg w-screen h-screen absolute top-0 left-0 z-10">
@@ -28,9 +27,9 @@ export const ModalSignUp = ( props: ModalSignUpProps ) => {
         </div>
         <div className="col-span-3">
           <div className="grid grid-cols-1 gap-2">
-            <SInputText customOnChange={event => {setName(event.target.value)}} label="Name" type="text"/>
-            <SInputText customOnChange={event => {setEmail(event.target.value)}} label="E-mail" type="text" />
-            <SInputText customOnChange={event => {setOcupation(event.target.value)}} label="Ocupation" type="text" />
+            <SInputText customOnChange={event => {setName(event.target.value);}} label="Name" type="text"/>
+            <SInputText customOnChange={event => {setEmail(event.target.value);}} label="E-mail" type="text" />
+            <SInputText customOnChange={event => {setOcupation(event.target.value);}} label="Ocupation" type="text" />
           </div>
         </div>
         <div className="col-span-1 col-start-1 mt-5 "> 

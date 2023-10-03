@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 export function ResultTask(props : any) {
   return (
@@ -8,5 +8,5 @@ export function ResultTask(props : any) {
       </p>
     </div>
     
-  )
+  );
 }
