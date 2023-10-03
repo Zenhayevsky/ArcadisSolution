@@ -1,6 +1,7 @@
 import { Button } from './Button';
 import { SInputText } from '../components/SInputText';
 import { useState } from 'react';
+import { getUser } from '../services/getUser';
 
 interface ModalSignUpProps {
   onClose: () => void;
@@ -13,18 +14,26 @@ export const  ModalSignIn = ( props: ModalSignUpProps ) => {
   const [invalidEmail, setInvalidEmail] = useState(false);
 
   const signIn = () => {
-    const emailInStorage = localStorage.getItem('email');
-    const AuthorizedSignIn = (emailInStorage == emailSignIn);
-    
-    if (AuthorizedSignIn) {
-      props.onClose();
-      props.onSignIn();
-      setInvalidEmail(false);
-    }else {
+
+    try { 
+
+      getUser(emailSignIn).then((result) => {
+        const emaileRsponse = result[0].email;
+
+        if (emaileRsponse == emailSignIn) {
+          props.onClose();
+          props.onSignIn();
+          setInvalidEmail(false);
+        }else {
+          setInvalidEmail(true);
+        }
+
+      });
+
+    }catch (error) { 
       setInvalidEmail(true);
     }
 
-    return AuthorizedSignIn;
   };
 
   return (

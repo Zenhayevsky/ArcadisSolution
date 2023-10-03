@@ -10,9 +10,6 @@ router.get('/summary', (req, res) => {
   const {email} = req.query;
   const {title} = req.query;
 
-  console.log(email);
-  console.log(title);
-
   if (!title || !email) {
     return res.status(200).send({ message: 'please, insert email and title'});
   }
@@ -26,6 +23,25 @@ router.get('/summary', (req, res) => {
   }
   
 } );
+
+router.get('/user', (req, res) => {
+
+  const {email} = req.query;
+
+  if (!email) {
+    return res.status(200).send({ message: 'please, insert email'});
+  }
+
+  const user = users.filter((user) => (user.email == email));
+ 
+  if (user.length > 0) {
+    return res.status(200).send(user);
+  } else {
+    return res.status(200).send('Usuario nao achado');
+  }
+
+} );
+
 
 router.post('/summary', (req, res) => {
 
