@@ -14,6 +14,12 @@ export const ModalSignUp = ( props: ModalSignUpProps ) => {
   const [email, setEmail] = useState('');
   const [ocupation, setOcupation] = useState('');
 
+  const payload = {
+    'name': name,
+    'email': email,
+    'ocupation': ocupation
+  };
+
   const signUp = () => {
     localStorage.setItem('name', name);
     localStorage.setItem('email', email);
@@ -38,7 +44,7 @@ export const ModalSignUp = ( props: ModalSignUpProps ) => {
           <a className="text-green-900 cursor-pointer" onClick={props.onClose} > Close </a>
         </div>
         <div className="col-span-1 col-start-3 mt-5 "> 
-          <Button tittle='Sign up' onClick={() =>{signUp(); createUser();}} />
+          <Button tittle='Sign up' onClick={() =>{signUp(); createUser(payload);}} />
         </div>
       </div>
     </div>
