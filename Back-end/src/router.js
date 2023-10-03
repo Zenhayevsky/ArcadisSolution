@@ -1,6 +1,7 @@
 const express = require('express');
-const summaries = require('./summary.json');
+const summaries = require('../sumary.json');
 const router = express.Router();
+const fs = require('fs');
 
 router.get('/summary', (req, res) => {
 
@@ -25,7 +26,16 @@ router.get('/summary', (req, res) => {
 } );
 
 router.post('/summary', (req, res) => {
-  res.send('app POST');
+
+  summaries.push(req.body);
+  
+  fs.writeFile('sumary.json', JSON.stringify(summaries), err => {
+    if (err) throw err; 
+  });
+
+  res.status(201).send('Done saving new summary');
+
+    
 });
 
 module.exports = router;
