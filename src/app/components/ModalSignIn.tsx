@@ -1,6 +1,5 @@
-import { Children } from "react";
-import { Button } from "./Button";
-import { SInputText } from "../components/SInputText";
+import { Button } from './Button';
+import { SInputText } from '../components/SInputText';
 import { useState } from 'react';
 
 interface ModalSignUpProps {
@@ -14,7 +13,7 @@ export const  ModalSignIn = ( props: ModalSignUpProps ) => {
   const [invalidEmail, setInvalidEmail] = useState(false);
 
   const signIn = () => {
-    const emailInStorage = localStorage.getItem("email");
+    const emailInStorage = localStorage.getItem('email');
     const AuthorizedSignIn = (emailInStorage == emailSignIn);
     
     if (AuthorizedSignIn) {
@@ -26,7 +25,7 @@ export const  ModalSignIn = ( props: ModalSignUpProps ) => {
     }
 
     return AuthorizedSignIn;
-  }
+  };
 
   return (
     <div className="bg-primary-500/80 flex justify-center items-center border-primary-500 rounded-lg w-screen h-screen absolute top-0 left-0 z-10">
@@ -36,7 +35,7 @@ export const  ModalSignIn = ( props: ModalSignUpProps ) => {
         </div>
         <div className="col-span-3">
           <div className="grid grid-cols-1 gap-2">
-            <SInputText invalidData={invalidEmail} customOnChange={event => {setEmailSignIn(event.target.value)}} label="E-mail" type="text"/>
+            <SInputText invalidData={invalidEmail} customOnChange={event => {setEmailSignIn(event.target.value);}} label="E-mail" type="text"/>
           </div>
         </div>
         <div className="col-span-1 col-start-1 mt-5 "> 
