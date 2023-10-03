@@ -18,7 +18,6 @@ export async function createUser(payload: payloadProps) {
 
     return response;
   } catch (error) {
-    console.log(error);
     return 'OFFLINE API';
   }
 }
