@@ -4,6 +4,7 @@ const users = require('../users.json');
 const router = express.Router();
 const fs = require('fs');
 
+
 router.get('/summary', (req, res) => {
 
   const {email} = req.query;

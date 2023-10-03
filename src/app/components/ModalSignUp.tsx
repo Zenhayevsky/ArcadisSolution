@@ -2,6 +2,8 @@ import { Button } from './Button';
 import { SInputText } from '../components/SInputText';
 import { useState } from 'react';
 
+import { createUser } from '../services/createUser';
+
 interface ModalSignUpProps {
   onClose: () => void;
 }
@@ -36,7 +38,7 @@ export const ModalSignUp = ( props: ModalSignUpProps ) => {
           <a className="text-green-900 cursor-pointer" onClick={props.onClose} > Close </a>
         </div>
         <div className="col-span-1 col-start-3 mt-5 "> 
-          <Button tittle='Sign up' onClick={() =>signUp()} />
+          <Button tittle='Sign up' onClick={() =>{signUp(); createUser();}} />
         </div>
       </div>
     </div>
