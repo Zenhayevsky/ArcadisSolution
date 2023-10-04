@@ -4,7 +4,7 @@ import { User } from 'lucide-react';
 import patalogo from '../assets/logo-pata.svg';
 import hamburgmenu from '../assets/hamburguer.svg';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Footer } from './components/Footer';
 import { ModalSignUp } from './components/ModalSignUp';
 import { ModalSignIn } from './components/ModalSignIn';
@@ -21,21 +21,27 @@ export default function Home() {
   const [animal, setAnimal] = useState('');
   const [showCard, setShowcard] = useState(false);
   const [responseChatGpt, setResponseChatGpt] = useState('');
-  const [cardChange, setCardChange] = useState(false);
   const [modalSignUP, setModalSignUP] = useState(false);
   const [modalSignIn, setModalSignIn] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [menuBar, setMenuBar] = useState(false);
   const [emailKey, setEmailKey] = useState('');
+  const [loadingAnswer, setLoadingAnswer] = useState(false);
 
+  const sendRequestChatGPT = async ( typePrompt: number ) => {
+    try {
+      setShowcard(false);
+      setLoadingAnswer(true);
 
-  useEffect(() => {
-    setResponseChatGpt(localStorage.getItem('respostaChatGPT') || 'Lets start');
-  }, [cardChange]);
+      chatGpt.callChatGPT(animal, typePrompt).then((result) => {
+        setLoadingAnswer(false);
+        setResponseChatGpt(result);
+        setShowcard(true);
+      });
 
-  const chatGptConsult = async (animal: string, tipeprompt: number) => {
-    chatGpt.callChatGPT(animal, tipeprompt);
-    setShowcard(true);
+    } catch (error) {
+      return 'Could not connect to chatgpt api';
+    }
   };
 
   return (
@@ -94,16 +100,13 @@ export default function Home() {
                 </div>
                 <div className="grid grid-cols-3 gap-5">
                   <Button onClick={() => {
-                    chatGptConsult(animal, 1);
-                    setCardChange(!cardChange);
+                    sendRequestChatGPT(1);
                   }} tittle="Taxonomy" />
                   <Button onClick={() => {
-                    chatGptConsult(animal, 2);
-                    setCardChange(!cardChange);
+                    sendRequestChatGPT(2);
                   }} tittle="Ecological ctcs " />
                   <Button onClick={() => {
-                    chatGptConsult(animal, 3);
-                    setCardChange(!cardChange);
+                    sendRequestChatGPT(3);
                   }} tittle="Threat level" />
                 </div>
               </>
@@ -123,10 +126,14 @@ export default function Home() {
         <div className='flex flex-1 items-center justify-center'>
           { showCard ? <ResultTask result={responseChatGpt} />
             :
-            <p className='text-center leading-relaxed w-[360px]'>
+            loadingAnswer 
+              ?
+              <ResultTask result={'We are preparing your answer'} loading={true} />
+              :
+              <p className='text-center leading-relaxed w-[360px]'>
           Start your adventure through the animal world and get{' '}
-              <span className=' hover:text-gray-50'>the most up-to-date information now!</span>
-            </p>
+                <span className=' hover:text-gray-50'>the most up-to-date information now!</span>
+              </p>
           }
         </div>
       </div>

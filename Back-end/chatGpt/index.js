@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import * as apikey from '../secrets';
 
-export const callChatGPT = (animal, tipeprompt) => {
+export const callChatGPT = async (animal, tipeprompt) => {
   
   const axios = require('axios');
 
@@ -24,7 +24,7 @@ export const callChatGPT = (animal, tipeprompt) => {
     console.log(`Sorry, we are out of ${tipeprompt}.`);
   }
 
-  axios.post(apiUrl, {
+  const response = await axios.post(apiUrl, {
     model: 'text-davinci-003',
     prompt,
     temperature: 0.7,
@@ -34,11 +34,13 @@ export const callChatGPT = (animal, tipeprompt) => {
       'Content-Type' : 'application/json',
       'Authorization' : `Bearer ${apiKey}`
     }
-  })
-    .then(response => {
-      const jsonresponse = response.data.choices[0].text;
-      localStorage.setItem('respostaChatGPT', jsonresponse);
-      console.log(jsonresponse);
-    })
-    .catch(error => console.log(error));
+  });
+
+  return response.data.choices[0].text;
+
+  // .then(response => {
+  //   return response.data.choices[0].text;
+  // })
+  //   .catch(error => console.log(error));
+    
 };
