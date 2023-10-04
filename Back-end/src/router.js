@@ -24,12 +24,22 @@ router.get('/summary', (req, res) => {
   
 } );
 
+router.get('/users', (req, res) => {
+ 
+  if (users.length > 0) {
+    return res.status(200).send(users);
+  } else {
+    return res.status(500).send('No users on database');
+  }
+
+} );
+
 router.get('/user', (req, res) => {
 
   const {email} = req.query;
 
   if (!email) {
-    return res.status(200).send({ message: 'please, insert email'});
+    return res.status(500).send({ message: 'please, insert email'});
   }
 
   const user = users.filter((user) => (user.email == email));
@@ -37,7 +47,7 @@ router.get('/user', (req, res) => {
   if (user.length > 0) {
     return res.status(200).send(user);
   } else {
-    return res.status(200).send('Usuario nao achado');
+    return res.status(200).send({ message: 'This user is not in database' });
   }
 
 } );
@@ -56,7 +66,13 @@ router.post('/summary', (req, res) => {
     
 });
 
-router.post('/createuser', (req, res) => {
+router.post('/createUser', (req, res) => {
+
+  const NoDataValidation = req.body.email == '' || req.body.name == '' || req.body.ocupation == '' || req.body == null;
+  
+  if(NoDataValidation) {
+    return res.status(500).send({ message: 'please, insert your personal data'});
+  }
 
   users.push(req.body);
   
