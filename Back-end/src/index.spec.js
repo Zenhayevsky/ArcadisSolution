@@ -4,17 +4,6 @@ const app = require('./app');
 const { describe } = require('node:test');
 const users = require('../users.json');
 
-describe('Test server get /users', () => {
-  it('should get main all users un database', async () => {
-    const res = await request(app).get('/users');
-
-    expect(res.statusCode).toEqual(200);
-    expect(res.body[0]).toHaveProperty('email');
-    expect(res.body[0]).toHaveProperty('name');
-    expect(res.body[0]).toHaveProperty('ocupation');
-  });
-} );
-
 describe('Test server post /createUser', () => {
   it('should get main route', async () => {
     const res = await request(app).post('/createUser').send({
@@ -75,6 +64,17 @@ describe('Test server post /createUser with no ocupation', () => {
     expect(res.statusCode).toEqual(500);
     expect(res.body).toHaveProperty('message');
     expect(res.body.message).toEqual('please, insert your personal data');
+  });
+} );
+
+describe('Test server get /users', () => {
+  it('should get main all users un database', async () => {
+    const res = await request(app).get('/users');
+
+    expect(res.statusCode).toEqual(200);
+    expect(res.body[0]).toHaveProperty('email');
+    expect(res.body[0]).toHaveProperty('name');
+    expect(res.body[0]).toHaveProperty('ocupation');
   });
 } );
 
