@@ -45,7 +45,7 @@ export default function Home() {
   };
 
   return (
-    <main className='grid grid-cols-2 min-h-screen'>
+    <main className='grid tiny:grid-col-1 sm:grid-col-2 md:grid-col-2 lg:grid-cols-2 w-screen min-h-screen'>
 
       {modalSignUP && <ModalSignUp onClose={() => setModalSignUP(false)} />}
       {modalSignIn && <ModalSignIn onSignIn={() => setSignedIn(true)} onClose={() => setModalSignIn(false)} />}
@@ -96,15 +96,15 @@ export default function Home() {
                 Enter the animal or species and then select the type of search you want to do
                   </p>
                   <input type="text" className="cursor-pointer rounded-md mb-16 h-8 w-full p-2
-              focus:outline-none text-primary-500" onChange={event =>setAnimal(event.target.value)} />
+                    focus:outline-none text-primary-500" onChange={event =>setAnimal(event.target.value)} />
                 </div>
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 gap-5">
                   <Button onClick={() => {
                     sendRequestChatGPT(1);
                   }} tittle="Taxonomy" />
                   <Button onClick={() => {
                     sendRequestChatGPT(2);
-                  }} tittle="Ecological ctcs " />
+                  }} tittle="characteristics" />
                   <Button onClick={() => {
                     sendRequestChatGPT(3);
                   }} tittle="Threat level" />
@@ -113,7 +113,7 @@ export default function Home() {
             ): 
             <>
               <HomeStartRight />
-              <Button tittle='COMEÇAR A PESQUISA' onClick={() => {setNewTask(true);}} />
+              <Button tittle='Start Navigating' onClick={() => {setNewTask(true);}} />
             </>}
         </div>
         <Footer/>
@@ -122,7 +122,7 @@ export default function Home() {
       {/* right */}
       <div className='flex flex-col p-16 bg-primary-500 bg-cover'>
         {/* blur */}
-        <div className='absolute left-80 top-1/2 h-[288px] w-[526px] rounded-full -translate-y-1/2 translate-x-1/2 bg-primary-200 opacity-50 blur-full'/>
+        <div className='tiny:invisible md:visible absolute left-80 top-1/2 h-[288px] w-[526px] rounded-full -translate-y-1/2 translate-x-1/2 bg-primary-200 opacity-50 blur-full'/>
         <div className='flex flex-1 items-center justify-center'>
           { showCard ? <ResultTask result={responseChatGpt} />
             :
@@ -131,7 +131,7 @@ export default function Home() {
               <ResultTask result={'We are preparing your answer'} loading={true} />
               :
               <p className='text-center leading-relaxed w-[360px]'>
-          Start your adventure through the animal world and get{' '}
+                  Start your adventure through the animal world and get{' '}
                 <span className=' hover:text-gray-50'>the most up-to-date information now!</span>
               </p>
           }

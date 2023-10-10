@@ -9,5 +9,5 @@ export function MenuButton(props: ButtonProps) {
             rounded-md bg-primary-300 text-primary-400" {...props}>
       {props.tittle}
     </button>
-  )
+  );
 }
