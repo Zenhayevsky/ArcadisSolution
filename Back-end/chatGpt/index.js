@@ -37,10 +37,5 @@ export const callChatGPT = async (animal, tipeprompt) => {
   });
 
   return response.data.choices[0].text;
-
-  // .then(response => {
-  //   return response.data.choices[0].text;
-  // })
-  //   .catch(error => console.log(error));
     
 };
